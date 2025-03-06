@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   Switch,
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ChevronLeftIcon, PlusIcon, XCircleIcon } from 'react-native-heroicons/solid';
@@ -291,7 +292,7 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                     </View>
                   </TouchableOpacity>
                 ) : (
-                  <TouchableOpacity onPress={() => handleDeleteHorseImage(index)} style={{
+                  <TouchableOpacity onPress={() => handleDeleteHorseImage(0)} style={{
                     position: 'relative',
                     zIndex: 1,
                   }}>

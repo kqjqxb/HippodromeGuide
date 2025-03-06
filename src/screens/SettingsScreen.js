@@ -49,8 +49,7 @@ const SettingsScreen = ({ setSelectedScreen }) => {
         zIndex: 5
       }}>
         <TouchableOpacity onPress={() => {
-          // setSelectedScreen('Home');
-          backBackBack();
+          setSelectedScreen('Home');
         }} style={{
           flexDirection: 'row',
           alignItems: 'center',
