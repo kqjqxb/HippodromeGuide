@@ -1,45 +1,41 @@
-import React, { useState, useEffect, use } from 'react';
-import { View, Text, TouchableOpacity, Alert, Image, Dimensions, ImageBackground, SafeAreaView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUserData, saveUserData } from '../redux/userSlice';
+import React, { useState, } from 'react';
+import { View, Text, TouchableOpacity, Alert, Image, Dimensions, ImageBackground, SafeAreaView, Modal } from 'react-native';
 import questionsData from '../components/questionsData';
 import { XMarkIcon } from 'react-native-heroicons/solid';
 
 const fontMontserratRegular = 'Montserrat-Regular';
 
-const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizStarted }) => {
+const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStarted }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const score = useSelector(state => state.user.currentScore);
-  const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  const dispatch = useDispatch();
-  const [transparentOptions, setTransparentOptions] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-
-  const theme = questionsData;
-  const questions = theme?.questions || [];
-
-  useEffect(() => {
-    console.log('selectedAnswer', selectedAnswer);
-  }, [selectedAnswer])
+  const [borderColor, setBorderColor] = useState('white');
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [isReplyButtonActive, setIsReplyButtonActive] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleAnswerSelect = (isCorrect) => {
+    setIsReplyButtonActive(false);
     if (isCorrect) {
-      Alert.alert('Correct!');
-      setConsecutiveCorrect(prev => prev + 1);
-      if (consecutiveCorrect + 1 === 2) {
-        setConsecutiveCorrect(0);
-      }
-    } else {
-      Alert.alert('Incorrect!');
-      if (score >= 100) {
+      setCorrectAnswers((prev) => prev + 1);
+      setBorderColor('#52FF2B');
 
-        setConsecutiveCorrect(0);
-      } else {
-      }
+    } else {
+      setWrongAnswers((prev) => prev + 1);
+      setBorderColor('#FF382B');
     }
-    nextQuestion();
+
+    setTimeout(() => {
+      setIsReplyButtonActive(true);
+      setSelectedAnswer(null);
+      setBorderColor('white');
+      if (currentQuestionIndex < questionsData.length - 1) {
+        setCurrentQuestionIndex(prev => prev + 1);
+      } else {
+        setModalVisible(true);
+      }
+    }, 500)
   };
 
   const nextQuestion = () => {
@@ -49,10 +45,6 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
       Alert.alert('Quiz completed!');
     }
   };
-
-  useEffect(() => {
-    setTransparentOptions([])
-  }, [currentQuestionIndex])
 
   return (
     <ImageBackground
@@ -244,6 +236,7 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
                 fontWeight: 300,
                 paddingVertical: dimensions.height * 0.023,
                 marginLeft: dimensions.width * 0.02,
+                maxWidth: dimensions.width * 0.7,
               }}
             >
               {questionsData[currentQuestionIndex].help}
@@ -297,7 +290,7 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 paddingVertical: dimensions.height * 0.01,
-                borderColor: 'white',
+                borderColor: borderColor,
                 borderWidth: selectedAnswer?.answer === answ.answer ? dimensions.width * 0.01 : 0,
               }}>
               <View style={{
@@ -334,6 +327,7 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
                   textAlign: 'left',
                   alignSelf: 'flex-start',
                   marginLeft: dimensions.width * 0.02,
+                  maxWidth: dimensions.width * 0.7,
                 }}
               >
                 {answ.answer}
@@ -342,7 +336,8 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
           ))}
 
           <TouchableOpacity
-            onPress={() => handleAnswerSelect(selectedAnswer?.answer.isCorrect)}
+            onPress={() => handleAnswerSelect(selectedAnswer?.isCorrect)}
+            disabled={!isReplyButtonActive || !selectedAnswer}
             style={{
               width: dimensions.width * 0.9,
               padding: dimensions.width * 0.03,
@@ -375,6 +370,196 @@ const QuizzHippodromeScreen = ({ setActiveBottomTab, isQuizStarted, setIsQuizSta
           </TouchableOpacity>
         </SafeAreaView>
       )}
+
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <ImageBackground source={require('../assets/images/quizBg.png')}
+          style={{
+            flex: 1,
+            width: dimensions.width,
+            height: dimensions.height
+          }}>
+          <SafeAreaView style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <View style={{
+              width: dimensions.width * 0.9,
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#181A29',
+              borderRadius: dimensions.width * 0.03,
+              padding: dimensions.width * 0.05,
+            }}>
+              <Text
+                style={{
+                  fontFamily: fontMontserratRegular,
+                  color: 'white',
+                  fontSize: dimensions.width * 0.08,
+                  textAlign: 'center',
+                  alignSelf: 'center',
+                  paddingHorizontal: dimensions.width * 0.05,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                }}>
+                your result
+              </Text>
+            </View>
+
+            <View style={{
+              width: dimensions.width * 0.9,
+              marginTop: dimensions.height * 0.016,
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#181A29',
+              borderRadius: dimensions.width * 0.03,
+              paddingVertical: dimensions.height * 0.05,
+            }}>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'center',
+                paddingHorizontal: dimensions.width * 0.025,
+              }}>
+                {['Correct', 'Incorrect'].map((item, index) => (
+                  <View key={index} style={{
+                    backgroundColor: '#363B5C',
+                    borderRadius: dimensions.width * 0.03,
+                    paddingHorizontal: dimensions.width * 0.03,
+                    marginHorizontal: dimensions.width * 0.01,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingVertical: dimensions.height * 0.025,
+                    width: dimensions.width * 0.4,
+                    shadowColor: '#26293F',
+                    shadowOffset: {
+                      width: 0,
+                      height: dimensions.height * 0.0055,
+                    },
+                    shadowOpacity: 1,
+                    shadowRadius: 0.1,
+                    elevation: 5,
+                  }}>
+                    <Text
+                      style={{
+                        fontFamily: fontMontserratRegular,
+                        color: 'white',
+                        fontSize: dimensions.width * 0.034,
+                        textAlign: 'left',
+                        alignSelf: 'flex-start',
+                        paddingHorizontal: dimensions.width * 0.01,
+                        fontWeight: 300,
+                        textTransform: 'uppercase',
+                      }}>
+                      {item}
+                    </Text>
+
+                    <Text
+                      style={{
+                        fontFamily: fontMontserratRegular,
+                        color: 'white',
+                        fontSize: dimensions.width * 0.061,
+                        textAlign: 'left',
+                        alignSelf: 'flex-start',
+                        paddingHorizontal: dimensions.width * 0.01,
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        marginTop: dimensions.height * 0.01,
+                      }}>
+                      {item === 'Correct' ? correctAnswers : wrongAnswers}/10
+                    </Text>
+                  </View>
+                ))}
+                </View>
+                <View style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  marginTop: dimensions.height * 0.05,
+                }}>
+                  <TouchableOpacity 
+                    onPress={() => {
+                      setModalVisible(false);
+                      setIsQuizStarted(false);
+                      setIsReplyButtonActive(true);
+                      setCorrectAnswers(0);
+                      setWrongAnswers(0);
+                      setCurrentQuestionIndex(0);
+                    }}
+                  style={{
+                    width: dimensions.width * 0.16,
+                    height: dimensions.width * 0.16,
+                    backgroundColor: '#0A84FF',
+                    borderRadius: dimensions.width * 0.03,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginRight: dimensions.width * 0.01,
+                    shadowColor: '#054D96',
+                    shadowOffset: {
+                      width: 0,
+                      height: dimensions.height * 0.0055,
+                    },
+                    shadowOpacity: 1,
+                    shadowRadius: 0.1,
+                    elevation: 5,
+                  }}>
+                    <Image source={require('../assets/icons/reloadQuizIcon.png')}
+                      style={{
+                        width: dimensions.width * 0.1,
+                        height: dimensions.width * 0.1,
+                      }}
+                      resizeMode='contain'
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity 
+                    onPress={() => {
+                      setModalVisible(false);
+                      setSelectedScreen('Home');
+                      setIsQuizStarted(false);
+                    }}
+                  style={{
+                    width: dimensions.width * 0.16,
+                    height: dimensions.width * 0.16,
+                    backgroundColor: '#FF382B',
+                    borderRadius: dimensions.width * 0.03,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginLeft: dimensions.width * 0.005,
+                    shadowColor: '#B90B00',
+                    shadowOffset: {
+                      width: 0,
+                      height: dimensions.height * 0.0055,
+                    },
+                    shadowOpacity: 1,
+                    shadowRadius: 0.1,
+                    elevation: 5,
+                  }}>
+                    <Image source={require('../assets/icons/quitQuizIcon.png')}
+                      style={{
+                        width: dimensions.width * 0.1,
+                        height: dimensions.width * 0.1,
+                      }}
+                      resizeMode='contain'
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+          </SafeAreaView>
+        </ImageBackground>
+      </Modal>
     </ImageBackground>
   );
 };

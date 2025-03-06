@@ -7,12 +7,12 @@ workflows:
       groups:
         - creds
       vars:
-        XCODE_WORKSPACE: "ReginasGreenGlow.xcworkspace" # <----
-        XCODE_SCHEME: "ReginasGreenGlow" # <----
-        BUNDLE_ID: "com.reginas.green.glow.app" # <----
-        APP_STORE_APP_ID: 6742783280 # <----
-        APP_STORE_CONNECT_KEY_ID: "UGR4QHKRFQ" # <----
-        APP_STORE_CONNECT_ISSUER_ID: "c94eae93-0e13-4cea-b3f9-c37022f13fcc" # <----
+        XCODE_WORKSPACE: "HippodromeGuide.xcworkspace" # <----
+        XCODE_SCHEME: "HippodromeGuide" # <----
+        BUNDLE_ID: "com.hippodrome.guide.app" # <----
+        APP_STORE_APP_ID: 6742878508 # <----
+        APP_STORE_CONNECT_KEY_ID: "U3DM6YLK4Z" # <----
+        APP_STORE_CONNECT_ISSUER_ID: "d4df78c8-4a12-4f6f-a077-12fb95dfc990" # <----
         node: latest
         xcode: latest
         cocoapods: default
@@ -52,7 +52,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - lrgsergio@yahoo.com       # <----
+          - horatiogardner1997@gmail.com       # <----
         notify:
           success: true
           failure: false
