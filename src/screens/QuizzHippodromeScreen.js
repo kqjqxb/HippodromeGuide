@@ -172,6 +172,11 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
             <TouchableOpacity
               onPress={() => {
                 setIsQuizStarted(false);
+                setIsReplyButtonActive(true);
+                setCorrectAnswers(0);
+                setWrongAnswers(0);
+                setSelectedAnswer(null);
+                setCurrentQuestionIndex(0);
               }}
               style={{
                 backgroundColor: '#FF382B',
