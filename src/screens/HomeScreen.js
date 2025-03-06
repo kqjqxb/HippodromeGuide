@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, use } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -9,16 +9,8 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MapView, { Marker } from 'react-native-maps';
-import ArticlesScreen from './ArticlesScreen';
 import localsData from '../components/localsData';
-
-const fontMontserratRegular = 'Montserrat-Regular';
-
-import articles from '../components/articles';
 import SettingsScreen from './SettingsScreen';
-import JournalScreen from './JournalScreen';
-import BubblesScreen from './BubblesScreen';
-import { useAudio } from '../context/AudioContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import LocDetailsScreen from './LocDetailsScreen';
 import RacetracksScreen from './RacetracksScreen';
@@ -27,6 +19,7 @@ import HorsesScreen from './HorsesScreen';
 import AddHorseScreen from './AddHorseScreen';
 import QuizzHippodromeScreen from './QuizzHippodromeScreen';
 
+const fontMontserratRegular = 'Montserrat-Regular';
 
 const bottomBtns = [
   {
@@ -53,43 +46,18 @@ const bottomBtns = [
     title: 'Quiz',
     btnIcon: require('../assets/icons/buttons/quizIcon.png'),
   },
-
 ]
 
-
 const HomeScreen = () => {
-
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
   const [selectedScreen, setSelectedScreen] = useState('Home');
   const [selectedHippodromeLoc, setSelectedHippodromeLoc] = useState(null);
   const [racetracks, setRacetracks] = useState([]);
   const [horses, setHorses] = useState([]);
   const [isQuizStarted, setIsQuizStarted] = useState(false);
-  const [isMusicEnabled, setIsMusicEnabled] = useState(true);
-  const [isNotificationEnabled, setNotificationEnabled] = useState(true);
-
 
   useEffect(() => {
-    console.log('racetracks:', racetracks);
-  }, [selectedScreen])
-
-
-
-  const loadReginasSettings = async () => {
-    try {
-      const musicReginasValue = await AsyncStorage.getItem('isMusicEnabled');
-      const notificationReginasValue = await AsyncStorage.getItem('isNotificationEnabled');
-
-      if (musicReginasValue !== null) setIsMusicEnabled(JSON.parse(musicReginasValue));
-      if (notificationReginasValue !== null) setNotificationEnabled(JSON.parse(notificationReginasValue));
-    } catch (error) {
-      console.error("Error loading settings:", error);
-    }
-  };
-
-
-  useEffect(() => {
-    const loadEntertainments = async () => {
+    const loadRacetracks = async () => {
       try {
         const storedRacetracks = await AsyncStorage.getItem('racetracks');
         if (storedRacetracks) {
@@ -100,7 +68,7 @@ const HomeScreen = () => {
       }
     };
 
-    loadEntertainments();
+    loadRacetracks();
   }, [selectedScreen, racetracks]);
 
 
@@ -118,11 +86,6 @@ const HomeScreen = () => {
 
     loadHorses();
   }, [selectedScreen, racetracks]);
-
-  useEffect(() => {
-    loadReginasSettings();
-  }, [isNotificationEnabled, selectedScreen]);
-
 
   return (
     <View style={{
@@ -177,7 +140,6 @@ const HomeScreen = () => {
                 resizeMode="contain"
               />
             </TouchableOpacity>
-
           </View>
 
           <ScrollView showsVerticalScrollIndicator={false} style={{
@@ -208,7 +170,6 @@ const HomeScreen = () => {
                   longitudeDelta: 0.01,
                 }}
               >
-
                 {localsData.map((location, index) => (
                   <Marker
                     key={index}
@@ -224,7 +185,6 @@ const HomeScreen = () => {
                 flex: 1,
                 width: dimensions.width,
               }}>
-
                 {localsData.map((location, index) => (
                   <TouchableOpacity
                     onPress={() => {
@@ -269,6 +229,7 @@ const HomeScreen = () => {
                         }}>
                         {location.title}
                       </Text>
+
                       <View style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
@@ -296,9 +257,7 @@ const HomeScreen = () => {
                           resizeMode='contain'
                         />
                       </View>
-
                     </View>
-
                   </TouchableOpacity>
                 ))}
               </SafeAreaView>
@@ -308,10 +267,7 @@ const HomeScreen = () => {
       ) : selectedScreen === 'LocDetails' ? (
         <LocDetailsScreen setSelectedScreen={setSelectedScreen} selectedHippodromeLoc={selectedHippodromeLoc} setSelectedHippodromeLoc={setSelectedHippodromeLoc} />
       ) : selectedScreen === 'Settings' ? (
-        <SettingsScreen setSelectedScreen={setSelectedScreen} selectedScreen={selectedScreen}
-          setNotificationEnabled={setNotificationEnabled} isNotificationEnabled={isNotificationEnabled}
-          isMusicEnabled={isMusicEnabled} setIsMusicEnabled={setIsMusicEnabled}
-        />
+        <SettingsScreen setSelectedScreen={setSelectedScreen} selectedScreen={selectedScreen}/>
       ) : selectedScreen === 'Racetracks' ? (
         <RacetracksScreen setSelectedScreen={setSelectedScreen} racetracks={racetracks} setRacetracks={setRacetracks} />
       ) : selectedScreen === 'Horses' ? (
@@ -323,7 +279,6 @@ const HomeScreen = () => {
       ) : selectedScreen === 'Quiz' ? (
         <QuizzHippodromeScreen setSelectedScreen={setSelectedScreen} isQuizStarted={isQuizStarted} setIsQuizStarted={setIsQuizStarted} />
       ) : null}
-
 
       {selectedScreen !== 'BubblesGame' &&
         selectedScreen !== 'LocDetails' &&

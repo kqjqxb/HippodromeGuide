@@ -3,47 +3,29 @@ import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   Dimensions,
   Image,
-  Share,
-  Switch,
   Linking,
-  Alert,
-  Modal,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import RNRestart from 'react-native-restart';
-import { BlurView } from '@react-native-community/blur';
 import { ChevronLeftIcon, ChevronRightIcon } from 'react-native-heroicons/solid';
 
 const fontMontserratRegular = 'Montserrat-Regular';
-const fontPoppinsRegular = 'Poppins-Regular';
-const fontCormorantRegular = 'Cormorant-Regular';
 
 const linksButtons = [
   {
     id: 1,
     title: 'Terms of use',
-    link: '',
+    link: 'https://www.termsfeed.com/live/826bd1df-20da-474d-9982-6b78da09c52e',
   },
   {
     id: 2,
     title: 'Privacy Policy',
-    link: ''
+    link: 'https://www.termsfeed.com/live/08074c95-a44e-4c3f-b020-8233b38bfe7f'
   }
 ]
 
-const SettingsScreen = ({ setSelectedScreen, }) => {
+const SettingsScreen = ({ setSelectedScreen }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-
-
-
-
-
-
-
-
 
   return (
     <View style={{
@@ -89,7 +71,6 @@ const SettingsScreen = ({ setSelectedScreen, }) => {
           </Text>
         </TouchableOpacity>
 
-
         <Text
           style={{
             fontFamily: fontMontserratRegular,
@@ -105,7 +86,6 @@ const SettingsScreen = ({ setSelectedScreen, }) => {
         </Text>
         <View></View>
       </View>
-
 
       <View style={{
         width: dimensions.width * 0.9,
@@ -126,39 +106,35 @@ const SettingsScreen = ({ setSelectedScreen, }) => {
           }}
           resizeMode='contain'
         />
-
       </View>
 
-
-
-
-        {linksButtons.map((button) => (
-          <TouchableOpacity
-            key={button.id}
-            onPress={() => {
-              Linking.openURL(button.link);
-            }}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: dimensions.width * 0.05,
-              backgroundColor: '#23263C',
-              borderRadius: dimensions.width * 0.05,
-              width: dimensions.width * 0.9,
-              marginTop: dimensions.height * 0.01,
-            }}>
-            <Text style={{
-              color: 'white',
-              fontSize: dimensions.width * 0.04,
-              fontFamily: fontMontserratRegular,
-              fontWeight: 400,
-            }}>
-              {button.title}
-            </Text>
-            <ChevronRightIcon size={dimensions.height * 0.03} color='white' />
-          </TouchableOpacity>
-        ))}
+      {linksButtons.map((button) => (
+        <TouchableOpacity
+          key={button.id}
+          onPress={() => {
+            Linking.openURL(button.link);
+          }}
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: dimensions.width * 0.05,
+            backgroundColor: '#23263C',
+            borderRadius: dimensions.width * 0.05,
+            width: dimensions.width * 0.9,
+            marginTop: dimensions.height * 0.01,
+          }}>
+          <Text style={{
+            color: 'white',
+            fontSize: dimensions.width * 0.04,
+            fontFamily: fontMontserratRegular,
+            fontWeight: 400,
+          }}>
+            {button.title}
+          </Text>
+          <ChevronRightIcon size={dimensions.height * 0.03} color='white' />
+        </TouchableOpacity>
+      ))}
     </View>
   );
 };

@@ -14,8 +14,6 @@ import * as ImagePicker from 'react-native-image-picker';
 
 const fontMontserratRegular = 'Montserrat-Regular';
 
-
-
 const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
   const [images, setImages] = useState([]);
@@ -28,8 +26,8 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
 
   const handleDeleteImage = (index) => {
     Alert.alert(
-      "Delete Image",
-      "Are you sure you want to delete this image?",
+      "Delete racetrack Image",
+      "Are you sure you want to delete racetrack image?",
       [
         {
           text: "Cancel",
@@ -47,7 +45,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
       ]
     );
   };
-
 
   const handleSave = async () => {
     const racetracks = JSON.parse(await AsyncStorage.getItem('racetracks')) || [];
@@ -70,7 +67,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
       console.error('Error saving entertainment:', error);
     }
   };
-
 
   const handleImagePicker = () => {
     if (images.length >= 3) {
@@ -132,7 +128,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
           </Text>
         </TouchableOpacity>
 
-
         <Text
           style={{
             fontFamily: fontMontserratRegular,
@@ -146,7 +141,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
           }}>
           Add racetrack
         </Text>
-
 
         <TouchableOpacity onPress={() => {
           handleSave();
@@ -184,7 +178,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
           alignSelf: 'center',
           paddingBottom: dimensions.height * 0.16,
         }}>
-
           <Image
             source={require('../assets/images/settingsHorseImage.png')}
             style={{
@@ -214,7 +207,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
                   marginBottom: dimensions.height * 0.01,
                 }}>
                 <View>
-
                   <Image
                     source={require('../assets/images/photoImage.png')}
                     style={{
@@ -255,15 +247,12 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
                     zIndex: 3,
                     top: '32%',
                     left: '10%',
-
                   }}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
             )}
-
           </View>
-
 
           <TextInput
             placeholder="Name"
@@ -407,9 +396,6 @@ const AddRacetrackScreen = ({ setSelectedScreen, racetracks, setRacetracks }) =>
           />
         </View>
       </ScrollView>
-
-
-
     </View>
   );
 };

@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef, use } from 'react';
+import React, { useState, } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
   Dimensions,
-  SafeAreaView,
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { ChevronLeftIcon } from 'react-native-heroicons/solid';
@@ -13,10 +12,8 @@ import { ChevronLeftIcon } from 'react-native-heroicons/solid';
 const fontMontserratRegular = 'Montserrat-Regular';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 const LocDetailsScreen = ({ setSelectedScreen, selectedHippodromeLoc }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-
 
   return (
     <View style={{
@@ -25,7 +22,6 @@ const LocDetailsScreen = ({ setSelectedScreen, selectedHippodromeLoc }) => {
       height: dimensions.height,
       backgroundColor: '#181A29',
     }}>
-
       <View style={{
         backgroundColor: '#23263C',
         width: dimensions.width,
@@ -100,7 +96,6 @@ const LocDetailsScreen = ({ setSelectedScreen, selectedHippodromeLoc }) => {
               }}>
               {selectedHippodromeLoc.title}
             </Text>
-
 
             <View style={{
               flexDirection: 'row',

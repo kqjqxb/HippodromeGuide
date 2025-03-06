@@ -63,10 +63,10 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
     }
   };
 
-  const handleDeleteImage = (index) => {
+  const handleDeleteHorseImage = (index) => {
     Alert.alert(
-      "Delete Image",
-      "Are you sure you want to delete this image?",
+      "Delete horse Image",
+      "Are you sure you want to delete horse image?",
       [
         {
           text: "Cancel",
@@ -89,12 +89,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
     const newValue = !isReminderEnabled;
     setIsReminderEnabled(newValue);
   };
-
-
-  useEffect(() => {
-    console.log('dietObjects', dietObjects);
-  }, [dietObjects])
-
 
   const addDiet = () => {
     if (dietTitle !== '') {
@@ -141,7 +135,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
       console.error('Error saving entertainment:', error);
     }
   };
-
 
   const handleImagePicker = () => {
     if (images.length >= 3) {
@@ -205,7 +198,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
           </Text>
         </TouchableOpacity>
 
-
         <Text
           style={{
             fontFamily: fontMontserratRegular,
@@ -219,7 +211,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
           }}>
           Add horse
         </Text>
-
 
         <TouchableOpacity onPress={() => {
           if (!isFirstPageWasVisible) {
@@ -287,7 +278,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                       marginBottom: dimensions.height * 0.01,
                     }}>
                     <View>
-
                       <Image
                         source={require('../assets/images/photoImage.png')}
                         style={{
@@ -301,7 +291,7 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                     </View>
                   </TouchableOpacity>
                 ) : (
-                  <TouchableOpacity onPress={() => handleDeleteImage(index)} style={{
+                  <TouchableOpacity onPress={() => handleDeleteHorseImage(index)} style={{
                     position: 'relative',
                     zIndex: 1,
                   }}>
@@ -334,9 +324,7 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                     />
                   </TouchableOpacity>
                 )}
-
               </View>
-
 
               <TextInput
                 placeholder="Name"
@@ -468,7 +456,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                 borderRadius: dimensions.width * 0.025,
               }}>
                 {dietObjects.map((dietObj, index) => (
-
                   <View key={dietObj.id} style={{
                     width: dimensions.width * 0.8,
                     borderRadius: dimensions.width * 0.023,
@@ -479,7 +466,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-
                   }}>
                     <Text style={{
                       fontFamily: fontMontserratRegular,
@@ -495,7 +481,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                       {dietObj.dietTitle}
                     </Text>
 
-
                     <TouchableOpacity
                       onPress={() => removeDiet(dietObj)}
                       style={{
@@ -507,7 +492,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                       }}>
                       <XCircleIcon size={dimensions.height * 0.03} color='white' />
                     </TouchableOpacity>
-
                   </View>
                 ))}
                 <TextInput
@@ -553,9 +537,7 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                     }}>
                     Add
                   </Text>
-
                 </TouchableOpacity>
-
               </View>
             </>
           ) : (
@@ -611,7 +593,6 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
                       flexDirection: 'row',
                       justifyContent: 'center',
                       alignItems: 'center',
-
                     }}>
                     <Text style={{
                       fontFamily: fontMontserratRegular,
@@ -698,13 +679,8 @@ const AddHorseScreen = ({ setSelectedScreen }) => {
               </View>
             </>
           )}
-
-
         </View>
       </ScrollView>
-
-
-
     </View>
   );
 };

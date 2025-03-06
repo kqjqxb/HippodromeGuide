@@ -1,12 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState, useRef, use } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
   Dimensions,
-  SafeAreaView,
   Modal,
 } from 'react-native';
 
@@ -21,7 +20,6 @@ const formatHippodromeDate = (date) => {
   return `${day}.${month}.${year}`;
 };
 
-
 const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIsHorseDetailsVisible, horses }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,7 +31,6 @@ const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIs
     setIsHorseDetailsVisible(false);
     await AsyncStorage.setItem('horses', JSON.stringify(updatedHorses));
   };
-
 
   return (
     <View style={{
@@ -239,7 +236,6 @@ const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIs
               Workout journal
             </Text>
 
-
             <View style={{
               width: dimensions.width * 0.9,
               borderRadius: dimensions.width * 0.023,
@@ -331,9 +327,7 @@ const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIs
                 </View>
               </>
             )}
-
           </View>
-
 
           <TouchableOpacity
             onPress={() => {
@@ -470,7 +464,6 @@ const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIs
                   Remove
                 </Text>
               </TouchableOpacity>
-
             </View>
           </View>
         </View>

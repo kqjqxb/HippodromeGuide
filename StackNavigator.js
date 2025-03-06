@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, View, Platform } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
@@ -11,8 +11,6 @@ import { UserProvider, UserContext } from './src/context/UserContext';
 import { Provider, useDispatch } from 'react-redux';
 import store from './src/redux/store';
 import { loadUserData } from './src/redux/userSlice';
-import { AudioProvider } from './src/context/AudioContext';
-
 
 const Stack = createNativeStackNavigator();
 
@@ -50,7 +48,7 @@ const AppNavigator = () => {
           setUser(JSON.parse(storedHippodromeGuideUser));
         }
       } catch (error) {
-        console.error('Error loading of reginas user', error);
+        console.error('Error loading of hippodrome user', error);
       } finally {
         setInitializingHippodromeGuideApp(false);
       }
@@ -73,11 +71,9 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      <AudioProvider>
-        <Stack.Navigator initialRouteName={'Home'}>
-          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </AudioProvider>
+      <Stack.Navigator initialRouteName={'Home'}>
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

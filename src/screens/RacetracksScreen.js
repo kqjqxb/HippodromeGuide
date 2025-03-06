@@ -8,8 +8,7 @@ import {
   Linking,
   ScrollView,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ChevronLeftIcon, ChevronRightIcon } from 'react-native-heroicons/solid';
+import { ChevronLeftIcon } from 'react-native-heroicons/solid';
 import RacetrackDetailsScreen from './RacetrackDetailsScreen';
 
 const fontMontserratRegular = 'Montserrat-Regular';
@@ -94,7 +93,6 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
         </TouchableOpacity>
       </View>
 
-
       {!isRacetrackDetailsVisible ? (
         <>
           {racetracks.length === 0 ? (
@@ -145,7 +143,6 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
                 }}>
                 Click the button to add your racetrack
               </Text>
-
 
               <TouchableOpacity
                 onPress={() => {
@@ -242,7 +239,6 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
                           borderRadius: dimensions.width * 0.5,
                           marginBottom: dimensions.height * 0.01,
                         }}>
-
                           <Image
                             source={require('../assets/images/photoImage.png')}
                             style={{
@@ -278,9 +274,6 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
       ) : (
         <RacetrackDetailsScreen selectedRacetrack={selectedRacetrack} setSelectedRacetrack={setSelectedRacetrack} setRacetracks={setRacetracks} setIsRacetrackDetailsVisible={setIsRacetrackDetailsVisible} racetracks={racetracks}/>
       )}
-
-
-
     </View>
   );
 };

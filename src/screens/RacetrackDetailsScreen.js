@@ -1,18 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState, useRef, use } from 'react';
+import React, { useState, } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
   Dimensions,
-  SafeAreaView,
   Modal,
 } from 'react-native';
 
 const fontMontserratRegular = 'Montserrat-Regular';
 import { ScrollView } from 'react-native-gesture-handler';
-
 
 const RacetrackDetailsScreen = ({ setSelectedScreen, selectedRacetrack, setRacetracks, setIsRacetrackDetailsVisible, racetracks }) => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
@@ -25,7 +23,6 @@ const RacetrackDetailsScreen = ({ setSelectedScreen, selectedRacetrack, setRacet
     setIsRacetrackDetailsVisible(false);
     await AsyncStorage.setItem('racetracks', JSON.stringify(updatedRacetracks));
   };
-
 
   return (
     <View style={{
@@ -205,7 +202,6 @@ const RacetrackDetailsScreen = ({ setSelectedScreen, selectedRacetrack, setRacet
             </Text>
           </View>
 
-
           <TouchableOpacity
             onPress={() => {
               setModalVisible(true);
@@ -341,7 +337,6 @@ const RacetrackDetailsScreen = ({ setSelectedScreen, selectedRacetrack, setRacet
                   Remove
                 </Text>
               </TouchableOpacity>
-
             </View>
           </View>
         </View>

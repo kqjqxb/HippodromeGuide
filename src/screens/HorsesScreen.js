@@ -5,13 +5,10 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
-  Linking,
   ScrollView,
   Modal,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ChevronLeftIcon, ChevronRightIcon } from 'react-native-heroicons/solid';
-import RacetrackDetailsScreen from './RacetrackDetailsScreen';
 import horseGuidesButtons from '../components/horseGuidesButtons';
 import HorseDetailsScreen from './HorseDetailsScreen';
 
@@ -98,8 +95,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
         </TouchableOpacity>
       </View>
 
-
-
       {!isHorseDetailsVisible ? (
         <ScrollView>
           <View style={{
@@ -159,7 +154,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                     {button.title}
                   </Text>
                   <ChevronRightIcon size={dimensions.height * 0.03} color='white' />
-
                 </TouchableOpacity>
               ))}
 
@@ -187,7 +181,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                   borderRadius: dimensions.width * 0.05,
                   padding: dimensions.width * 0.05,
                 }}>
-
                   <Text
                     style={{
                       fontFamily: fontMontserratRegular,
@@ -215,7 +208,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                     }}>
                     Click the button to add your horse
                   </Text>
-
 
                   <TouchableOpacity
                     onPress={() => {
@@ -326,7 +318,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                             </View>
                           )}
 
-
                           <Text
                             style={{
                               fontFamily: fontMontserratRegular,
@@ -341,7 +332,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                           </Text>
                         </TouchableOpacity>
                       ))}
-
                     </View>
                   </ScrollView>
                 </>
@@ -352,8 +342,6 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
       ) : (
         <HorseDetailsScreen selectedHorse={selectedHorse} setSelectedHorse={setSelectedHorse} setHorses={setHorses} setIsHorseDetailsVisible={setIsHorseDetailsVisible} horses={horses} />
       )}
-
-
 
       <Modal
         animationType="slide"
@@ -470,10 +458,8 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                   }}>
                   {point?.point}
                 </Text>
-
               </View>
             ))}
-
           </View>
         </View>
       </Modal>

@@ -20,7 +20,6 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
     if (isCorrect) {
       setCorrectAnswers((prev) => prev + 1);
       setBorderColor('#52FF2B');
-
     } else {
       setWrongAnswers((prev) => prev + 1);
       setBorderColor('#FF382B');
@@ -36,14 +35,6 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
         setModalVisible(true);
       }
     }, 500)
-  };
-
-  const nextQuestion = () => {
-    if (currentQuestionIndex < questionsData.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-    } else {
-      Alert.alert('Quiz completed!');
-    }
   };
 
   return (
@@ -148,8 +139,6 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
               }}
               resizeMode='contain'
             />
-
-
           </TouchableOpacity>
         </>
       ) : (
@@ -241,7 +230,6 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
             >
               {questionsData[currentQuestionIndex].help}
             </Text>
-
           </View>
 
           <View style={{
@@ -370,7 +358,6 @@ const QuizzHippodromeScreen = ({ setSelectedScreen, isQuizStarted, setIsQuizStar
           </TouchableOpacity>
         </SafeAreaView>
       )}
-
 
       <Modal
         animationType="fade"
