@@ -238,7 +238,8 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                 <>
                   <TouchableOpacity
                     onPress={() => {
-                      setSelectedScreen('AddHorse')
+                      // setSelectedScreen('AddHorse');
+                      addHorse();
                     }}
                     style={{
                       backgroundColor: 'white',
@@ -369,7 +370,8 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
             zIndex: 5
           }}>
             <TouchableOpacity onPress={() => {
-              setModalVisible(false);
+              // setModalVisible(false);
+              backAction();
             }} style={{
               flexDirection: 'row',
               alignItems: 'center',

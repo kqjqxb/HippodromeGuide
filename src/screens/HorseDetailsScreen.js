@@ -43,7 +43,7 @@ const HorseDetailsScreen = ({ setSelectedScreen, selectedHorse, setHorses, setIs
         width: dimensions.width,
         alignSelf: 'center',
         paddingTop: -dimensions.height * 0.1,
-        marginTop: -dimensions.height * 0.1,
+        marginTop: -dimensions.height * 0.05,
       }}>
         <View style={{
           width: dimensions.width,

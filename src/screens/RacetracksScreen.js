@@ -146,7 +146,8 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  setSelectedScreen('AddRacetrack')
+                  // setSelectedScreen('AddRacetrack');
+                  addRacetrackScreen();
                 }}
                 style={{
                   backgroundColor: 'white',

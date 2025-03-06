@@ -34,7 +34,7 @@ const LocDetailsScreen = ({ setSelectedScreen, selectedHippodromeLoc }) => {
         zIndex: 5
       }}>
         <TouchableOpacity onPress={() => {
-          setSelectedScreen('Home');
+          // setSelectedScreen('Home');
         }} style={{
           flexDirection: 'row',
           alignItems: 'center',
