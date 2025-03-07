@@ -100,7 +100,7 @@ const SettingsScreen = ({ setSelectedScreen }) => {
         <Image
           source={require('../assets/images/settingsHorseImage.png')}
           style={{
-            width: dimensions.width * 0.7,
+            width: dimensions.width * 0.73,
             height: dimensions.height * 0.25,
             marginBottom: dimensions.height * 0.03,
           }}

@@ -178,7 +178,7 @@ const HorsesScreen = ({ setSelectedScreen, horses, setHorses }) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   backgroundColor: '#23263C',
-                  borderRadius: dimensions.width * 0.05,
+                  borderRadius: dimensions.width * 0.052,
                   padding: dimensions.width * 0.05,
                 }}>
                   <Text

@@ -103,13 +103,13 @@ const RacetracksScreen = ({ setSelectedScreen, racetracks, setRacetracks }) => {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#23263C',
-              borderRadius: dimensions.width * 0.05,
+              borderRadius: dimensions.width * 0.052,
               padding: dimensions.width * 0.05,
             }}>
               <Image
                 source={require('../assets/images/racetrackHorseImage.png')}
                 style={{
-                  width: dimensions.width * 0.7,
+                  width: dimensions.width * 0.73,
                   height: dimensions.height * 0.25,
                   marginBottom: dimensions.height * 0.01,
                 }}
